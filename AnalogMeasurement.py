@@ -27,6 +27,7 @@ def freq_from_autocorr(sig, fs):
 class MyAnalogMeasurer(AnalogMeasurer):
     supported_measurements = ['fundamental']
     all_samples = None
+    sample_rate = None
 
     # Initialize your measurement extension here
     # Each measurement object will only be used once, so feel free to do all per-measurement initialization here
@@ -39,6 +40,10 @@ class MyAnalogMeasurer(AnalogMeasurer):
     #   * `data.samples` is a numpy array of float32 voltages, one for each sample
     #   * `data.sample_count` is the number of samples (same value as `len(data.samples)` but more efficient if you don't need a numpy array)
     def process_data(self, data):
+        if self.sample_rate is None:
+            delta = data.end_time - data.start_time
+            sample_delta = float(delta) / data.sample_count
+            self.sample_rate = 1.0 / sample_delta
         if self.all_samples is None:
             self.all_samples = data.samples
             return
@@ -47,6 +52,6 @@ class MyAnalogMeasurer(AnalogMeasurer):
     # This method is called after all the relevant data has been passed to `process_data`
     # It returns a dictionary of the request_measurements values
     def measure(self):
-        f = freq_from_autocorr(self.all_samples, 50e6)
+        f = freq_from_autocorr(self.all_samples, self.sample_rate)
         values = {'fundamental': f}
         return values
