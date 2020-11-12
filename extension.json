@@ -1,0 +1,20 @@
+{
+  "name": "Analog Fundamental Frequency",
+  "apiVersion": "1.0.0",
+  "author": "Mark \"Cool Guy\" Garrison",
+  "version": "0.0.1",
+  "description": "Measures fundamental frequency using autocorrelation.",
+  "extensions": {
+    "Analog Frequency Analysis": {
+      "type": "AnalogMeasurement",
+      "entryPoint": "AnalogMeasurement.MyAnalogMeasurer",
+      "metrics": {
+        "fundamental": {
+          "name": "fundamental",
+          "notation": "<i>f</i><sub>0</sub>",
+          "units": "Hz"
+        }
+      }
+    }
+  }
+}
