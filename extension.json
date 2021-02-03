@@ -2,7 +2,7 @@
   "name": "Analog Fundamental Frequency",
   "apiVersion": "1.0.0",
   "author": "Mark \"Cool Guy\" Garrison",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Measures fundamental frequency using autocorrelation.",
   "extensions": {
     "Analog Frequency Analysis": {
