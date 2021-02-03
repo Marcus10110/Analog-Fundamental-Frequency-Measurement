@@ -13,7 +13,10 @@ def freq_from_autocorr(sig, fs):
 
     # Find the first low point
     d = numpy.diff(corr)
-    start = numpy.nonzero(d > 0)[0][0]
+    non_zero = numpy.nonzero(d > 0)
+    if len(non_zero) == 0 or len(non_zero[0]) == 0:
+        return 0
+    start = non_zero[0][0]
 
     # Find the next peak after the low point (other than 0 lag).  This bit is
     # not reliable for long signals, due to the desired peak occurring between
